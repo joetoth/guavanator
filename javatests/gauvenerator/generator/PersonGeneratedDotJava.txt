@@ -1,0 +1,92 @@
+package abc.xyz;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
+
+public class Person implements Serializable {
+
+  private String firstName;
+  private final String lastName;
+  private int age;
+  private List<String> siblingNames = Lists.newArrayList();
+  private final ImmutableSet<String> parentNames;
+  @NonFinalForGwt private String height;
+
+  // Everything below this line is auto-generated
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public Person setFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  public int getAge() {
+    return age;
+  }
+
+  public Person setAge(int age) {
+    this.age = age;
+    return this;
+  }
+
+  public List<String> getSiblingNames() {
+    return siblingNames;
+  }
+
+  public Person setSiblingNames(List<String> siblingNames) {
+    this.siblingNames = siblingNames;
+    return this;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public ImmutableSet<String> getParentNames() {
+    return parentNames;
+  }
+  
+  public String getHeight() {
+    return height;
+  }
+  
+  @Override
+  public boolean equals(Object obj) {
+  if (!(obj instanceof Project)) {
+    return false;
+  }
+  
+  Person that = (Person) obj;
+  
+  return Objects.equal(firstName, that.firstName)
+    && Objects.equal(lastName, that.lastName)
+    && Objects.equal(age, that.age)
+    && Objects.equal(siblingNames, that.siblingNames)
+    && Objects.equal(parentNames, that.parentNames)
+    && Objects.equal(height, that.height);
+  }
+
+  public int hashCode() {
+    return Objects.hashCode(firstName, lastName, age, siblingNames, parentNames, height);
+  }
+
+  @Override
+  public String toString() {
+  return Objects.toStringHelper(this)
+    .add("firstName", firstName)
+    .add("lastName", lastName)
+    .add("age", age)
+    .add("siblingNames", siblingNames)
+    .add("parentNames", parentNames)
+    .add("height", height)
+    .toString();
+  }
+}

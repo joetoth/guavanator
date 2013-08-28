@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Gauvenerator
+Bundle-SymbolicName: gauvenerator;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: gauvanator.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.ui,
+ org.eclipse.ui.forms,
+ org.eclipse.ui.ide,
+ org.eclipse.text,
+ org.junit
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

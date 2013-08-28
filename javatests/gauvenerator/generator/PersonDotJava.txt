@@ -1,0 +1,8 @@
+public class Person implements Serializable {
+
+  private String firstName;
+  private final String lastName;
+  private int age;
+  private List<String> siblingNames = Lists.newArrayList();
+  private final ImmutableSet<String> parentNames;
+}
