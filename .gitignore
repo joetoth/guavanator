@@ -1,8 +1,7 @@
 .classpath
-classpath.project
-project.settings/
-settings@dot.log
-log@dot/
-dotbin/
-dotbingauvenerator_1.0.0.201308262251.jar
-jarjavaCompiler...args
+.project
+.settings
+@dot.log
+@dot/
+bin/
+javaCompiler...args
