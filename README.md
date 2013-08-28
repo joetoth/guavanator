@@ -87,11 +87,11 @@ Will Generate
 	
 			Person that = (Person) obj;
 	
-			return Objects.equals(this.firstName, that.firstName)
-					.equals(this.lastName, that.lastName)
-					.equals(this.age, that.age)
-					.equals(this.siblingNames, that.siblingNames)
-					.equals(this.parentNames, that.parentNames);
+			return Objects.equal(this.firstName, that.firstName)
+					&& Objects.equal(this.lastName, that.lastName)
+					&& Objects.equal(this.age, that.age)
+					&& Objects.equal(this.siblingNames, that.siblingNames)
+					&& Objects.equal(this.parentNames, that.parentNames);
 		}
 	
 		@Override
@@ -160,7 +160,7 @@ Will Generate
 			this.parentNames = builder.parentNames;
 		}
 	
-		public static Builder builder() {
+		public static Builder newBuilder() {
 			return new Builder();
 		}
 	}
