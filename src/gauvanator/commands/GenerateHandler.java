@@ -16,33 +16,33 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 public class GenerateHandler extends AbstractHandler {
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IEditorPart editor = HandlerUtil.getActiveWorkbenchWindow(event)
-				.getActivePage().getActiveEditor();
+  @Override
+  public Object execute(ExecutionEvent event) throws ExecutionException {
+    IEditorPart editor =
+        HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getActiveEditor();
 
-		IWorkingCopyManager manager = JavaUI.getWorkingCopyManager();
-		IEditorInput editorInput = editor.getEditorInput();
-		try {
-			manager.connect(editorInput);
-			ICompilationUnit workingCopy = manager.getWorkingCopy(editorInput);
+    IWorkingCopyManager manager = JavaUI.getWorkingCopyManager();
+    IEditorInput editorInput = editor.getEditorInput();
+    try {
+      manager.connect(editorInput);
+      ICompilationUnit workingCopy = manager.getWorkingCopy(editorInput);
 
-			BeanGenerator generator = new BeanGenerator();
+      BeanGenerator generator = new BeanGenerator();
 
-			generator.generate(workingCopy);
+      generator.generate(workingCopy);
 
-			synchronized (workingCopy) {
-				workingCopy.reconcile(ICompilationUnit.NO_AST, false, null, null);
-			}
+      synchronized (workingCopy) {
+        workingCopy.reconcile(ICompilationUnit.NO_AST, false, null, null);
+      }
 
-		} catch (JavaModelException e) {
-			e.printStackTrace();
-		} catch (CoreException e) {
-			e.printStackTrace();
-		} finally {
-			manager.disconnect(editorInput);
-		}
-		return null;
-	}
+    } catch (JavaModelException e) {
+      e.printStackTrace();
+    } catch (CoreException e) {
+      e.printStackTrace();
+    } finally {
+      manager.disconnect(editorInput);
+    }
+    return null;
+  }
 
 }

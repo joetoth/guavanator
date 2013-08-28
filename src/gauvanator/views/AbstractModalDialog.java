@@ -12,30 +12,31 @@ public abstract class AbstractModalDialog extends Dialog {
   private final Display display;
 
   public AbstractModalDialog(Shell parent) {
-	super(parent, SWT.APPLICATION_MODAL);
-	display = getParent().getDisplay();
+    super(parent, SWT.APPLICATION_MODAL);
+    display = getParent().getDisplay();
   }
 
   protected void display(Shell shell) {
-	shell.pack();
-	placeDialogInCenter(shell);
-	shell.open();
+    shell.pack();
+    placeDialogInCenter(shell);
+    shell.open();
 
-	while (!shell.isDisposed()) {
-	  if (!display.readAndDispatch())
-		display.sleep();
-	}
+    while (!shell.isDisposed()) {
+      if (!display.readAndDispatch()) {
+        display.sleep();
+      }
+    }
   }
 
   private void placeDialogInCenter(Shell shell) {
-	Rectangle parentSize = getParent().getBounds();
-	Rectangle mySize = shell.getBounds();
+    Rectangle parentSize = getParent().getBounds();
+    Rectangle mySize = shell.getBounds();
 
-	int locationX, locationY;
-	locationX = (parentSize.width - mySize.width) / 2 + parentSize.x;
-	locationY = (parentSize.height - mySize.height) / 2 + parentSize.y;
+    int locationX, locationY;
+    locationX = (parentSize.width - mySize.width) / 2 + parentSize.x;
+    locationY = (parentSize.height - mySize.height) / 2 + parentSize.y;
 
-	shell.setLocation(new Point(locationX, locationY));
+    shell.setLocation(new Point(locationX, locationY));
   }
 
 }

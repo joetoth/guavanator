@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Gauvenerator
-Bundle-SymbolicName: gauvenerator;singleton:=true
+Bundle-Name: Guavanator
+Bundle-SymbolicName: guavanator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: gauvanator.Activator
 Require-Bundle: org.eclipse.ui,
@@ -13,5 +13,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide,
  org.eclipse.text,
  org.junit
-Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy

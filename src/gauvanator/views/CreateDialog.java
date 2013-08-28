@@ -26,123 +26,119 @@ public class CreateDialog extends AbstractModalDialog {
   private Generator generator;
 
   public CreateDialog(Shell parent, Generator generator) {
-	super(parent);
-	this.generator = generator;
+    super(parent);
+    this.generator = generator;
   }
 
-  public void show(final ICompilationUnit compilationUnit)
-	  throws JavaModelException {
-	final Shell shell = new Shell(getParent(), SWT.DIALOG_TRIM
-	    | SWT.APPLICATION_MODAL | SWT.CENTER);
+  public void show(final ICompilationUnit compilationUnit) throws JavaModelException {
+    final Shell shell =
+        new Shell(getParent(), SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.CENTER);
 
-	shell.setText("Generate Builder Pattern Code");
+    shell.setText("Generate Builder Pattern Code");
 
-	shell.setLayout(new GridLayout(2, false));
+    shell.setLayout(new GridLayout(2, false));
 
-	Group fieldGroup = new Group(shell, SWT.SHADOW_ETCHED_IN);
-	fieldGroup.setText("Select fields to include:");
-	fieldGroup.setLayout(new RowLayout(SWT.VERTICAL));
-	GridData fieldGroupLayoutData = new GridData();
-	fieldGroupLayoutData.verticalSpan = 2;
-	fieldGroup.setLayoutData(fieldGroupLayoutData);
+    Group fieldGroup = new Group(shell, SWT.SHADOW_ETCHED_IN);
+    fieldGroup.setText("Select fields to include:");
+    fieldGroup.setLayout(new RowLayout(SWT.VERTICAL));
+    GridData fieldGroupLayoutData = new GridData();
+    fieldGroupLayoutData.verticalSpan = 2;
+    fieldGroup.setLayoutData(fieldGroupLayoutData);
 
-	List<IField> fields = CompilationUtils.findNonStaticFIelds(compilationUnit);
-	final List<Button> fieldButtons = new ArrayList<Button>();
-	for (IField field : fields) {
-	  Button button = new Button(fieldGroup, SWT.CHECK);
-	  button.setText(CompilationUtils.getName(field) + "(" + CompilationUtils.getType(field)
-		  + ")");
-	  button.setData(field);
-	  button.setSelection(true);
-	  fieldButtons.add(button);
-	}
+    List<IField> fields = CompilationUtils.findNonStaticFIelds(compilationUnit);
+    final List<Button> fieldButtons = new ArrayList<Button>();
+    for (IField field : fields) {
+      Button button = new Button(fieldGroup, SWT.CHECK);
+      button.setText(CompilationUtils.getName(field) + "(" + CompilationUtils.getType(field) + ")");
+      button.setData(field);
+      button.setSelection(true);
+      fieldButtons.add(button);
+    }
 
-	Button btnSelectAll = new Button(shell, SWT.PUSH);
-	btnSelectAll.setText("Select All");
-	GridData btnSelectAllLayoutData = new GridData(SWT.FILL, SWT.FILL, true,
-	    false);
-	btnSelectAllLayoutData.verticalIndent = 10;
-	btnSelectAll.setLayoutData(btnSelectAllLayoutData);
-	btnSelectAll.addSelectionListener(new SelectionAdapter() {
-	  public void widgetSelected(SelectionEvent event) {
-		for (Button button : fieldButtons) {
-		  button.setSelection(true);
-		}
-	  }
-	});
-	Button btnSelectNone = new Button(shell, SWT.PUSH);
-	btnSelectNone.setText("Deselect All");
-	GridData selectNoneGridData = new GridData();
-	selectNoneGridData.verticalAlignment = SWT.BEGINNING;
-	btnSelectNone.setLayoutData(selectNoneGridData);
-	btnSelectNone.addSelectionListener(new SelectionAdapter() {
-	  public void widgetSelected(SelectionEvent event) {
-		for (Button button : fieldButtons) {
-		  button.setSelection(false);
-		}
-	  }
-	});
+    Button btnSelectAll = new Button(shell, SWT.PUSH);
+    btnSelectAll.setText("Select All");
+    GridData btnSelectAllLayoutData = new GridData(SWT.FILL, SWT.FILL, true, false);
+    btnSelectAllLayoutData.verticalIndent = 10;
+    btnSelectAll.setLayoutData(btnSelectAllLayoutData);
+    btnSelectAll.addSelectionListener(new SelectionAdapter() {
+      public void widgetSelected(SelectionEvent event) {
+        for (Button button : fieldButtons) {
+          button.setSelection(true);
+        }
+      }
+    });
+    Button btnSelectNone = new Button(shell, SWT.PUSH);
+    btnSelectNone.setText("Deselect All");
+    GridData selectNoneGridData = new GridData();
+    selectNoneGridData.verticalAlignment = SWT.BEGINNING;
+    btnSelectNone.setLayoutData(selectNoneGridData);
+    btnSelectNone.addSelectionListener(new SelectionAdapter() {
+      public void widgetSelected(SelectionEvent event) {
+        for (Button button : fieldButtons) {
+          button.setSelection(false);
+        }
+      }
+    });
 
-	Group optionGroup = new Group(shell, SWT.SHADOW_ETCHED_IN);
-	optionGroup.setText("Options:");
-	optionGroup.setLayout(new RowLayout(SWT.VERTICAL));
-	GridData optionGridData = new GridData();
-	optionGridData.horizontalSpan = 2;
-	optionGridData.horizontalAlignment = SWT.FILL;
-	optionGroup.setLayoutData(optionGridData);
+    Group optionGroup = new Group(shell, SWT.SHADOW_ETCHED_IN);
+    optionGroup.setText("Options:");
+    optionGroup.setLayout(new RowLayout(SWT.VERTICAL));
+    GridData optionGridData = new GridData();
+    optionGridData.horizontalSpan = 2;
+    optionGridData.horizontalAlignment = SWT.FILL;
+    optionGroup.setLayoutData(optionGridData);
 
-	final Button createPrivateClassConstructor = new Button(optionGroup,
-	    SWT.RADIO);
-	createPrivateClassConstructor.setSelection(true);
-	createPrivateClassConstructor.setText("Create private class constructor");
+    final Button createPrivateClassConstructor = new Button(optionGroup, SWT.RADIO);
+    createPrivateClassConstructor.setSelection(true);
+    createPrivateClassConstructor.setText("Create private class constructor");
 
-	final Button createBuilderConstructor = new Button(optionGroup, SWT.RADIO);
-	createBuilderConstructor.setText("Create constructor in builder");
+    final Button createBuilderConstructor = new Button(optionGroup, SWT.RADIO);
+    createBuilderConstructor.setText("Create constructor in builder");
 
-	final Button formatSourceButton = new Button(optionGroup, SWT.CHECK);
-	formatSourceButton.setSelection(true);
-	formatSourceButton.setText("Format source (entire file)");
+    final Button formatSourceButton = new Button(optionGroup, SWT.CHECK);
+    formatSourceButton.setSelection(true);
+    formatSourceButton.setText("Format source (entire file)");
 
-	final Button executeButton = new Button(shell, SWT.PUSH);
-	executeButton.setText("Generate");
-	// GridData generateButtonGridData = new GridData();
-	// generateButtonGridData.horizontalAlignment = SWT.END;
-	// executeButton.setLayoutData(generateButtonGridData);
+    final Button executeButton = new Button(shell, SWT.PUSH);
+    executeButton.setText("Generate");
+    // GridData generateButtonGridData = new GridData();
+    // generateButtonGridData.horizontalAlignment = SWT.END;
+    // executeButton.setLayoutData(generateButtonGridData);
 
-	final Button cancelButton = new Button(shell, SWT.PUSH);
-	cancelButton.setText("Cancel");
-	// GridData cancelButtonGridData = new GridData();
-	// cancelButtonGridData.horizontalAlignment = SWT.END;
-	// cancelButton.setLayoutData(cancelButtonGridData);
+    final Button cancelButton = new Button(shell, SWT.PUSH);
+    cancelButton.setText("Cancel");
+    // GridData cancelButtonGridData = new GridData();
+    // cancelButtonGridData.horizontalAlignment = SWT.END;
+    // cancelButton.setLayoutData(cancelButtonGridData);
 
-	Listener clickListener = new Listener() {
-	  public void handleEvent(Event event) {
-		if (event.widget == executeButton) {
+    Listener clickListener = new Listener() {
+      public void handleEvent(Event event) {
+        if (event.widget == executeButton) {
 
-		  List<IField> selectedFields = new ArrayList<IField>();
-		  for (Button button : fieldButtons) {
-			if (button.getSelection()) {
-			  selectedFields.add((IField) button.getData());
-			}
-		  }
+          List<IField> selectedFields = new ArrayList<IField>();
+          for (Button button : fieldButtons) {
+            if (button.getSelection()) {
+              selectedFields.add((IField) button.getData());
+            }
+          }
 
-		  generator.generate(compilationUnit);
-//		  generator.generate(compilationUnit,
-//			  createBuilderConstructor.getSelection(),
-//			  formatSourceButton.getSelection(), selectedFields);
-		  shell.dispose();
-		} else {
-		  shell.dispose();
-		}
-	  }
-	};
+          generator.generate(compilationUnit);
+          // generator.generate(compilationUnit,
+          // createBuilderConstructor.getSelection(),
+          // formatSourceButton.getSelection(), selectedFields);
+          shell.dispose();
+        } else {
+          shell.dispose();
+        }
+      }
+    };
 
-	executeButton.addListener(SWT.Selection, clickListener);
-	cancelButton.addListener(SWT.Selection, clickListener);
+    executeButton.addListener(SWT.Selection, clickListener);
+    cancelButton.addListener(SWT.Selection, clickListener);
 
-	optionGroup.pack();
+    optionGroup.pack();
 
-	display(shell);
+    display(shell);
   }
 
 }
