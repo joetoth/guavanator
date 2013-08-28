@@ -12,7 +12,8 @@ import org.eclipse.jdt.core.JavaModelException;
 
 public class GettersSettersFragmentGenerator {
 
-	private static final String[] NOT_NULL_ANNOTATION_NAMES = { "NonFinalForGwt", "NotNull" };
+	// Many used for GWT and other serialization frameworks that can't have a field marked final
+	private static final String[] NON_FINAL_ANNOTATION_NAMES = { "NonFinalForGwt" };
 
 	private final ICompilationUnit compilationUnit;
 
@@ -52,7 +53,7 @@ public class GettersSettersFragmentGenerator {
 	private boolean isFieldMutable(IField field) {
 		try {
 			for (IAnnotation annotation : field.getAnnotations()) {
-				for (String notNullAnnotationName : NOT_NULL_ANNOTATION_NAMES) {
+				for (String notNullAnnotationName : NON_FINAL_ANNOTATION_NAMES) {
 					if (Flags.isFinal(field.getFlags())
 							|| annotation.getElementName().equals(notNullAnnotationName)) {
 						return false;
