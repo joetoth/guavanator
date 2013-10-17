@@ -3,6 +3,8 @@
 	<name>guavanator-site</name>
 	<comment></comment>
 	<projects>
+		<project>gauvanator-feature</project>
+		<project>guavanator</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
