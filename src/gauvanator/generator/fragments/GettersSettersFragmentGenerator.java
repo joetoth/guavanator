@@ -52,6 +52,10 @@ public class GettersSettersFragmentGenerator {
 
   private boolean isFieldMutable(IField field) {
     try {
+      if((field.getFlags() & Flags.AccFinal) == Flags.AccFinal) {
+        return false;
+      }
+
       for (IAnnotation annotation : field.getAnnotations()) {
         for (String notNullAnnotationName : NON_FINAL_ANNOTATION_NAMES) {
           if (Flags.isFinal(field.getFlags())

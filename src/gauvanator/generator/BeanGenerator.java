@@ -38,7 +38,7 @@ public class BeanGenerator implements Generator {
       sb.append(BuilderFragmentGenerator.generate(cu));
 
       IType clazz = cu.getTypes()[0];
-
+      cu.createImport("com.google.common.base.Objects", null, null);
       int pos = clazz.getSourceRange().getOffset() + clazz.getSourceRange().getLength() - 1;
 
       buffer.replace(pos, 0, sb.toString());
